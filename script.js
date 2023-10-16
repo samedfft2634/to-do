@@ -27,6 +27,7 @@ listContainer.addEventListener(
 	function (e) {
 		if (e.target.tagName === "LI") {
 			e.target.classList.toggle("checked");
+            reorderTasks();
 			saveData();
 		} else if (e.target.tagName === "SPAN") {
 			e.target.parentElement.remove();
@@ -37,6 +38,13 @@ listContainer.addEventListener(
 );
 
 inputBox.addEventListener("keypress", handleKeyPress);
+
+function reorderTasks() {
+    const checkedItems = Array.from(listContainer.getElementsByClassName("checked"));
+    checkedItems.forEach((item) => {
+        listContainer.appendChild(item);
+    });
+}
 
 function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);

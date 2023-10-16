@@ -16,6 +16,12 @@ function addTask() {
 	saveData();
 }
 
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        addTask();
+    }
+}
+
 listContainer.addEventListener(
 	"click",
 	function (e) {
@@ -30,6 +36,12 @@ listContainer.addEventListener(
 	false
 );
 
+inputBox.addEventListener("keypress", handleKeyPress);
+
 function saveData() {
 	localStorage.setItem("data", listContainer.innerHTML);
 }
+function showTask() {
+	listContainer.innerHTML = localStorage.getItem("data");
+}
+showTask()
